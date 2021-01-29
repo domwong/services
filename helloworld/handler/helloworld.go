@@ -26,7 +26,7 @@ func (e *Helloworld) Call(ctx context.Context, req *helloworld.Request, rsp *hel
 			logger.Infof("Key %s val %s", k, v)
 		}
 	}
-	callTok, ok := metadata.Get(ctx, "CallerToken")
+	callTok, ok := metadata.Get(ctx, "Caller-Token")
 	if ok {
 		acc,err:= auth.Inspect(callTok)
 		if err!=nil {
