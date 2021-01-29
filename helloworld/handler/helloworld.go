@@ -18,6 +18,14 @@ func (e *Helloworld) Call(ctx context.Context, req *helloworld.Request, rsp *hel
 	if ok {
 		logger.Infof("Account is %+v", acc)
 	}
+	md, ok:= metadata.FromContext(ctx)
+	if !ok {
+		logger.Errorf("No metadata found")
+	} else {
+		for k, v:=range md {
+			logger.Infof("Key %s val %s", k, v)
+		}
+	}
 	callTok, ok := metadata.Get(ctx, "CallerToken")
 	if ok {
 		acc,err:= auth.Inspect(callTok)
