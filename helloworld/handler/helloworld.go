@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"github.com/micro/micro/v3/service/auth"
+	"github.com/micro/micro/v3/service/client"
 	"github.com/micro/micro/v3/service/context/metadata"
 
 	"github.com/micro/micro/v3/service/logger"
@@ -13,7 +14,7 @@ type Helloworld struct{}
 
 // Call is a single request handler called via client.Call or the generated client code
 func (e *Helloworld) Call(ctx context.Context, req *helloworld.Request, rsp *helloworld.Response) error {
-	logger.Info("Received Helloworld.Call request")
+	logger.Info("Received Helloworld.Call request2")
 	acc,ok:= auth.AccountFromContext(ctx)
 	if ok {
 		logger.Infof("Account is %+v", acc)
@@ -39,5 +40,21 @@ func (e *Helloworld) Call(ctx context.Context, req *helloworld.Request, rsp *hel
 		logger.Errorf("Can't find caller token")
 	}
 	rsp.Msg = "Hello " + req.Name
+
+
+	request := client.DefaultClient.NewRequest(
+		"helloworld",
+		"Helloworld.Call",
+		&helloworld.Request{},
+	)
+
+
+	// create request/response
+	rsp2:=helloworld.Response{}
+	if err:=client.DefaultClient.Call(ctx, request, &rsp2, client.WithAuthToken(), client.WithNetwork("micro")); err!=nil {
+		logger.Errorf("Error calling helloworld %s", err)
+		return err
+	}
+	logger.Infof("Response from service %s", rsp2.Msg)
 	return nil
 }
