@@ -10,7 +10,7 @@ require (
 	github.com/gosimple/slug v1.9.0
 	github.com/hailocab/go-geoindex v0.0.0-20160127134810-64631bfe9711
 	github.com/micro/dev v0.0.0-20201117163752-d3cfc9788dfa
-	github.com/micro/micro/v3 v3.0.5-0.20210203152700-7c144fef2d5f
+	github.com/micro/micro/v3 v3.0.5-0.20210204220913-18465eec3e77
 	github.com/miekg/dns v1.1.31 // indirect
 	github.com/stoewer/go-strcase v1.2.0
 	github.com/stretchr/testify v1.6.1
