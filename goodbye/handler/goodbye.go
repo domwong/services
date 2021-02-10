@@ -37,6 +37,6 @@ func (e *Goodbye) Call(ctx context.Context, req *goodbye.Request, rsp *goodbye.R
 	} else {
 		logger.Errorf("Can't find caller token")
 	}
-	rsp.Msg = "Hello " + req.Name
+	rsp.Msg = "Goodbye " + req.Name
 	return nil
 }
